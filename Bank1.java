@@ -5,7 +5,6 @@ import java.util.*;
 
 public class Bank1 {
 
-    // 👉 클래스는 여기 있어야 함 (main 밖!)
     static class Product {
         String name;
         int period;
@@ -30,6 +29,7 @@ public class Bank1 {
             System.out.println(p.name + " | " + p.period + "개월 | " + p.maxRate + "%");
         }
     }
+    //csv 파일 읽기 
     public static List<Product> readCsv(String filePath) {
         List<Product> list = new ArrayList<>();
 
