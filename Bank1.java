@@ -20,14 +20,38 @@ public class Bank1 {
     }
 
     public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+        System.out.println("월 저축액 입력 : ");
+        int money = s.nextInt();
+        System.out.println("원하는 만기일자 입력(개월) : ");
+        int endPeriod = s.nextInt();
+
 
         List<Product> list = readCsv("KBbank.csv");
-
-        System.out.println("=== 전체 상품 ===");
+        //필터링
+        List<Product> filtered = new ArrayList<>();
 
         for (Product p : list) {
-            System.out.println(p.name + " | " + p.period + "개월 | " + p.maxRate + "%");
+            if (endPeriod == p.period) {
+                filtered.add(p);
+            }}
+
+        filtered.sort((a, b) -> Double.compare(b.maxRate, a.maxRate));
+
+        System.out.println("=== 추천 상품 ===");
+
+
+        for (int i = 0; i < 3; i++) {
+            Product p = filtered.get(i);
+            double rate = p.baseRate /100;
+            System.out.println(p.name + " | " + p.period + "개월 | "
+                    + p.baseRate + "% | " + p.maxRate + "%");
+            for (int j = 1; j <= p.period; j++){
+                double interest = money * (rate/12) * j;
+                System.out.printf("%d개월차 이자 : %.2f\n ", j , interest);
+            }
         }
+
     }
     //csv 파일 읽기 
     public static List<Product> readCsv(String filePath) {
