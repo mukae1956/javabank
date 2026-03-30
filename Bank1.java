@@ -27,7 +27,7 @@ public class Bank1 {
         int endPeriod = s.nextInt();
 
 
-        List<Product> list = readCsv("KBbank.csv");
+        List<Product> list = readCsv("Bank_data.csv");
         //필터링
         List<Product> filtered = new ArrayList<>();
 
@@ -36,12 +36,12 @@ public class Bank1 {
                 filtered.add(p);
             }}
 
-        filtered.sort((a, b) -> Double.compare(b.maxRate, a.maxRate));
+        filtered.sort((a, b) -> Double.compare(b.baseRate, a.baseRate));
 
         System.out.println("=== 추천 상품 ===");
 
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 6; i++) {
             Product p = filtered.get(i);
             double rate = p.baseRate /100;
             System.out.println(p.name + " | " + p.period + "개월 | "
@@ -68,10 +68,11 @@ public class Bank1 {
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
 
-                String name = data[0];
-                int period = Integer.parseInt(data[1]);
-                double baseRate = Double.parseDouble(data[2]);
-                double maxRate = Double.parseDouble(data[3]);
+                String bankName = data[0];
+                String name = data[1];
+                int period = Integer.parseInt(data[2]);
+                double baseRate = Double.parseDouble(data[3]);
+                double maxRate = Double.parseDouble(data[4]);
 
                 Product p = new Product(name, period, baseRate, maxRate);
                 list.add(p);
