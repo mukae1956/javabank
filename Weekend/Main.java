@@ -7,19 +7,42 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
+        Input i = new Input();
 
-        System.out.println("월 저축액 입력 : ");
-        int money = s.nextInt();
+        while (true) {
+            try {
+                System.out.print("월 저축액 입력 : ");
+                i.money = s.nextInt();
+                i.input(); // 검사
+                break; // 정상 입력이면 반복 종료
+            } catch (InputMismatchException e) {
+                System.out.println("숫자만 입력해주세요!");
+                s.nextLine(); // 입력 버퍼 비우기 (중요!)
+            } catch (MinusException e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
-        System.out.println("원하는 만기일자 입력(개월) : ");
-        int endPeriod = s.nextInt();
+        while (true) {
+            try {
+                System.out.print("원하는 만기일자 입력(개월) : ");
+                i.endPeriod = s.nextInt();
+                i.input2();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("숫자만 입력해주세요!");
+                s.nextLine();
+            } catch (Minus2Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
 
         List<Product> list = CsvReader.readCsv("Bank_data.csv");
 
         // 필터링
         List<Product> filtered = new ArrayList<>();
         for (Product p : list) {
-            if (p.period == endPeriod) {
+            if (p.period == i.endPeriod) {
                 filtered.add(p);
             }
         }
@@ -34,7 +57,7 @@ public class Main {
         Map<Product, double[]> dataMap = new LinkedHashMap<>();
 
         for (Product p : topProducts) {
-            double[] interests = InterestCalculator.calculate(money, p);
+            double[] interests = InterestCalculator.calculate(i.money, p);
             dataMap.put(p, interests);
 
             System.out.println(p.bankName + " | " + p.name + " | " + p.baseRate + "%");
