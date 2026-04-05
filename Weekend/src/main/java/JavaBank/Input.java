@@ -1,4 +1,4 @@
-package Project.Weekend;
+package JavaBank;
 
 public class Input {
     int money;

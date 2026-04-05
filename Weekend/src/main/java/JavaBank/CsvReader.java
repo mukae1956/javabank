@@ -1,4 +1,4 @@
-package Project.Weekend;
+package JavaBank;
 
 import java.io.*;
 import java.util.*;

@@ -1,4 +1,4 @@
-package Project.Weekend;
+package JavaBank;
 
 import java.util.*;
 
@@ -42,9 +42,10 @@ public class Main {
         // 필터링
         List<Product> filtered = new ArrayList<>();
         for (Product p : list) {
-            if (p.period == i.endPeriod) {
+            if (p.period <= i.endPeriod) {
                 filtered.add(p);
             }
+
         }
 
         // 금리 높은 순 정렬

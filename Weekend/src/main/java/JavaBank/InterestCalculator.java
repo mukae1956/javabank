@@ -1,4 +1,4 @@
-package Project.Weekend;
+package JavaBank;
 
 public class InterestCalculator {
 
@@ -7,7 +7,7 @@ public class InterestCalculator {
         double rate = p.baseRate / 100;
 
         for (int j = 1; j <= p.period; j++) {
-            double interest = money * (rate / 12) * j;
+            double interest = money * (rate / 12) * (j * (j + 1) / 2.0);
             interests[j - 1] = interest;
         }
 

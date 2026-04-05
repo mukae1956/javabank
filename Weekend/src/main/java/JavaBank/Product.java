@@ -1,4 +1,4 @@
-package Project.Weekend;
+package JavaBank;
 
 public class Product {
     String bankName;
